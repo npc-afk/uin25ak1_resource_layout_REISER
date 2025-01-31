@@ -90,9 +90,12 @@
 
             function visKategori(kategori) { 
                 main.innerHTML = ""
-                const resource = resources.find(r => r.category === kategori)
+                
+                const filteredResource = resources.filter(r => r.category === kategori)
 
-                if (resource) {
+                if (filteredResource.length > 0) {
+                    const resource = filteredResource[0]  
+
                     const h2 = document.createElement("h2")
                     h2.textContent = resource.category
                     main.appendChild(h2)
@@ -102,6 +105,8 @@
                     main.appendChild(p)
 
                     const ul = document.createElement("ul")
+                    
+                    
                     resource.sources.map(source => {
                         const li = document.createElement("li")
                         const a = document.createElement("a")
@@ -110,7 +115,7 @@
                         a.target = "_blank"
                         li.appendChild(a)
                         return li
-                    }).forEach(li => ul.appendChild(li))
+                    }).forEach(li => ul.appendChild(li))  
 
                     main.appendChild(ul)
                 }
@@ -127,6 +132,7 @@
                 nav.appendChild(button)
             })
 
+            
             visKategori("HTML")
             document.querySelector("button").classList.add("active")
         })
